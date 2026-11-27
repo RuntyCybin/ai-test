@@ -1,0 +1,65 @@
+### 1. Chat básico
+GET http://localhost:8080/api/chat?message=Explica qué es un record de Java en una frase
+
+### 1b. Chat con metadatos (modelo y tokens)
+GET http://localhost:8080/api/chat/details?message=¿Qué es Spring AI?
+
+### 1c. Opciones por petición (effort alto)
+GET http://localhost:8080/api/chat/deep
+
+### 2. Streaming (SSE)
+GET http://localhost:8080/api/stream?message=Escribe un haiku sobre Maven
+
+### 3a. Prompt template desde fichero (.st)
+POST http://localhost:8080/api/prompt/translate
+Content-Type: application/json
+
+{"text": "Spring AI hace fácil integrar LLMs en aplicaciones Java", "language": "inglés", "tone": "informal"}
+
+### 3b. Prompt template en línea
+POST http://localhost:8080/api/prompt/explain
+Content-Type: application/json
+
+{"concept": "inyección de dependencias", "level": "principiante"}
+
+### 4a. Salida estructurada: objeto
+GET http://localhost:8080/api/structured/recipe?ingredient=lentejas
+
+### 4b. Salida estructurada: lista
+GET http://localhost:8080/api/structured/books?genre=novela negra
+
+### 4c. Extracción de datos
+POST http://localhost:8080/api/structured/extract-contact
+Content-Type: text/plain
+
+Hola, soy Marta Gil de Ferretería Gil. Escríbeme a marta@ferreteriagil.es o llama al 612 345 678.
+
+### 5a. Memoria: primer mensaje
+POST http://localhost:8080/api/memory/ana
+Content-Type: text/plain
+
+Hola, me llamo Ana y programo en Kotlin
+
+### 5b. Memoria: el modelo recuerda
+POST http://localhost:8080/api/memory/ana
+Content-Type: text/plain
+
+¿Cómo me llamo y qué lenguaje uso?
+
+### 5c. Ver historial
+GET http://localhost:8080/api/memory/ana
+
+### 6a. Tool calling: fecha/hora
+GET http://localhost:8080/api/tools?message=¿Qué hora es ahora en Tokio y en Madrid?
+
+### 6b. Tool calling: consultar y modificar pedidos
+GET http://localhost:8080/api/tools?message=¿En qué estado está el pedido A-101? Si se puede, cancélalo
+
+### 7a. RAG
+GET http://localhost:8080/api/rag?question=¿Cuántos días puedo teletrabajar y qué día tengo que ir a la oficina?
+
+### 7b. Solo búsqueda semántica (no llama a Claude)
+GET http://localhost:8080/api/rag/search?query=presupuesto de formación
+
+### 8. Multimodal (usa curl):
+# curl -F "image=@foto.jpg" -F "question=¿Qué hay en esta imagen?" http://localhost:8080/api/vision
